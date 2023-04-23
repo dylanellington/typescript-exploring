@@ -111,6 +111,14 @@ let tuple: [string, number, boolean];
 //any
 let any: any;
 
+//destructuring
+let first, second: number;
+let rest: number[];
+[first, second, ...rest] = [1, 2, 3, 4, 5];
+
+let dog = { color: "brown", age: 2, sound: "bark" };
+let { color, age } = dog;
+
 //never
 function throwError(error: string): never { 
     throw new Error(error); 
@@ -220,7 +228,13 @@ let func = (x: number, y: number) => { return x + y };
 function getTotal(...numbers: number[]) {
     return numbers.reduce((previous, current) => { return previous + current });
 }
-console.log(getTotal(1,2,6,1));
+
+getTotal(1,2,6,1);
+
+//function with default value
+function getTime(isUniversal: boolean = false) {
+    
+}
 
 //generator function
 function *fibonacci(count: number) {
@@ -278,6 +292,20 @@ if (1) {
 //for statement
 for (let i = 1; i < 2; i++) {
 
+}
+
+//for statement with label
+
+outer:
+for (let i = 1; i < 2; i++) {
+    inner:
+    for (let j = 1; j < 2; j++) {
+        if (i === 1) {
+            continue inner;
+        }
+
+        break outer;
+    }
 }
 
 //for in statement

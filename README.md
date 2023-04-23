@@ -1,4 +1,2 @@
-npm run build
-node lib/intro.js
-
+npm run main
 npm run test
