@@ -295,7 +295,6 @@ for (let i = 1; i < 2; i++) {
 }
 
 //for statement with label
-
 outer:
 for (let i = 1; i < 2; i++) {
     inner:
@@ -315,6 +314,16 @@ for (let key in numberArray) {
 
 //for of statement
 for (let value of numberArray) {
+
+}
+
+//for over keys
+for (let value of Object.keys(numberArray)) {
+
+}
+
+//for over key and value
+for (let [key, value] of Object.entries(numberArray)) {
 
 }
 
@@ -359,7 +368,7 @@ String.prototype.size = function(): number {
 
 "hello".size();
 
-//closure and currying
+//function closure and currying
 function log(errorType: string, time: string, message: string) {
     console.log(`LOGGER: [${errorType}, ${time}]: ${message}`);
 }
@@ -372,8 +381,41 @@ function logger(errorType: string) {
     };
 };
 
-let logInfo = logger("Info");
+let logInfo = logger("INFO");
 logInfo("Test logging using a closure.")
+
+//function dynamic curry, accept repeated calls until the total arguments given are equal to the orginal function
+function curry(fn: Function): Function {
+    return function curried(...args: any): any {
+        if (fn.length > args.length) {
+            return curried.bind(null, ...args);
+        } else {
+            return fn.call(null, ...args);
+        }
+    };
+};
+
+//function memoization
+function memoize(fn: Function): Function {
+    let cache = new Map<string, any>();
+
+    return function(...args: any[]) {
+        let key = JSON.stringify(args);
+        let result = cache.get(key);
+
+        if (result) {
+            return result;
+        }
+
+        result = fn(...args);
+        cache.set(key, result);
+        return result;
+    }
+}
+
+let sumFunc = memoize(sum);
+sumFunc(1, 2)
+sumFunc(1, 2) //cache hit
 
 //higher order functions
 interface Array<T> {
