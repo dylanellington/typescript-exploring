@@ -3,6 +3,7 @@ import {
   Route,
   BrowserRouter,
   Routes,
+  Link,
 } from "react-router-dom";
 import { Main as TicTacToe } from "./TicTacToe/Main"
 
@@ -18,7 +19,10 @@ createRoot(document.getElementById("root")!).render(
 function Index() {
   return (
     <div>
-      Projects
+      Projects:
+      <div>
+        <Link to="tictactoe">Tic Tac Toe</Link>
+      </div>
     </div>
   );
 }
